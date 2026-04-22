@@ -1,0 +1,172 @@
+import { questionsPart2 } from './questions_part2';
+
+export type Question = {
+  id: string;
+  chapterId: string;
+  type: 'short' | 'multiple';
+  question: string;
+  options?: string[];
+  answer: string;
+  explanation?: string;
+};
+
+const questionsPart1: Question[] = [
+  // --- 1. 생명체의 유기적 구성 (organization) ---
+  { id: "o-s1", chapterId: "organization", type: "short", question: "생물체를 구성하는 구조적, 기능적 가장 기본 단위를 무엇이라고 하나요?", answer: "세포", explanation: "성질을 가진 단위체의 시작점입니다." },
+  { id: "o-s2", chapterId: "organization", type: "short", question: "모양과 기능이 비슷한 세포들이 모여서 이루는 다음 단계는 무엇인가요?", answer: "조직", explanation: "상피 조직, 근육 조직 등 비슷한 세포들의 모임입니다." },
+  { id: "o-s3", chapterId: "organization", type: "short", question: "동물에게만 특이적으로 존재하며, 연관된 기능을 하는 기관들의 모임을 뜻하는 단계는?", answer: "기관계", explanation: "소화계, 호흡계, 순환계 등은 동물 특유의 구성입니다." },
+  { id: "o-s4", chapterId: "organization", type: "short", question: "관다발, 기본조직 등 식물에게만 특이적으로 존재하는 '조직들의 모임' 단계는 무엇인가요?", answer: "조직계", explanation: "식물은 기관계 대신 조직계를 가집니다." },
+  { id: "o-s5", chapterId: "organization", type: "short", question: "일정한 지역에 살고 있는 단일 종(동종) 개체들의 무리를 무엇이라 부르나요?", answer: "개체군", explanation: "같은 종끼리 모인 집단을 개체군이라 합니다." },
+  { id: "o-s6", chapterId: "organization", type: "short", question: "일정한 지역에 서식하는 여러 개체군(여러 종)들의 상호작용적 모임은 무엇인가요?", answer: "군집", explanation: "서로 다른 종의 모임들 전체를 군집이라 부릅니다." },
+  { id: "o-s7", chapterId: "organization", type: "short", question: "지구상의 모든 생태계가 모인 전체 체계의 최상위 구성 단계는?", answer: "생물권", explanation: "지구 공간 내의 모든 생명 환경을 아우릅니다." },
+  { id: "o-s8", chapterId: "organization", type: "short", question: "식물의 영양 기관 중 하나로, 빛을 받아 광합성을 주로 수행하는 기관은?", answer: "잎", explanation: "잎은 식물의 대표적인 영양 기관입니다." },
+  { id: "o-s9", chapterId: "organization", type: "short", question: "사람의 11개 기관계 중 음식물을 분해하고 흡수하는 역할을 하는 기관계는?", answer: "소화계", explanation: "위, 장 등이 포함된 소화계입니다." },
+  { id: "o-s10", chapterId: "organization", type: "short", question: "사람의 기관계 중 산소를 흡수하고 이산화탄소를 배출하는 기관계는?", answer: "호흡계", explanation: "폐, 기관지 등이 포함됩니다." },
+  { id: "o-m1", chapterId: "organization", type: "multiple", question: "동물의 기관에 해당하지 않는 것은?", options: ["위", "간", "적혈구", "심장"], answer: "적혈구", explanation: "적혈구는 세포 단계에 해당합니다." },
+  { id: "o-m2", chapterId: "organization", type: "multiple", question: "사람과 같은 고등 동물은 보통 몇 개의 기관계를 갖추고 있나요?", options: ["3개", "7개", "11개", "15개"], answer: "11개", explanation: "사람은 11개의 기관계로 구성됩니다." },
+  { id: "o-m3", chapterId: "organization", type: "multiple", question: "군집 체계와 빛, 공기, 물 등 비생물적(무기) 환경 요소가 상호작용하는 체계는?", options: ["개체군", "생물권", "생태계", "미시계"], answer: "생태계", explanation: "생물 + 무기 환경 = 생태계입니다." },
+  { id: "o-m4", chapterId: "organization", type: "multiple", question: "수많은 기관 또는 기관계가 유기적으로 모여 마침내 형성되는 독립된 한 생명의 단위는?", options: ["개체", "세포군", "생물권", "조직"], answer: "개체", explanation: "스스로 살아갈 수 있는 개체입니다." },
+  { id: "o-m5", chapterId: "organization", type: "multiple", question: "생물 구성 단계의 올바른 순서를 고르세요.", options: ["세포 → 기관 → 조직 → 개체", "조직 → 세포 → 기관계 → 생태계", "개체군 → 개체 → 군집 → 생물권", "개체군 → 군집 → 생태계 → 생물권"], answer: "개체군 → 군집 → 생태계 → 생물권", explanation: "점점 확장되는 단위입니다." },
+  { id: "o-m6", chapterId: "organization", type: "multiple", question: "동물과 식물의 유기적 구성의 차이점으로 가장 올바른 것은?", options: ["동물은 세포 조직이 없다.", "식물은 기관계 대신 조직계를 갖는다.", "식물은 기관 단계가 통째로 생략된다.", "식물과 동물의 구성은 완전히 동일하다."], answer: "식물은 기관계 대신 조직계를 갖는다.", explanation: "조직계는 식물 고유 특성입니다." },
+  { id: "o-m7", chapterId: "organization", type: "multiple", question: "다음 설명 중 틀린 것은?", options: ["세포 소기관은 세포를 형성한다.", "기관계의 기관들은 서로 독립적으로 작용하여 상호 참조하지 않는다.", "조직은 비슷한 세포들의 모임이다.", "생물권은 전체 지구의 무기 및 생물 환경을 다루는 단계이다."], answer: "기관계의 기관들은 서로 독립적으로 작용하여 상호 참조하지 않는다.", explanation: "기관들은 서로 유기적으로 상호작용합니다." },
+  { id: "o-m8", chapterId: "organization", type: "multiple", question: "식물의 생식 기관에 해당하는 것은?", options: ["뿌리", "줄기", "잎", "꽃"], answer: "꽃", explanation: "꽃, 열매, 종자는 생식 기관입니다." },
+  { id: "o-m9", chapterId: "organization", type: "multiple", question: "군집 수준 이상에서만 나타나는 구성 요소는?", options: ["단일 종의 개체 수", "개체군의 밀도", "무기 환경 요인", "종 다양성"], answer: "종 다양성", explanation: "군집은 여러 종의 모임이므로 종 다양성이 나타납니다." },
+  { id: "o-m10", chapterId: "organization", type: "multiple", question: "생명체의 유기적 구성에서 창발적 특성(Emergent properties)이 나타나는 이유는?", options: ["하위 단위가 모여 상위 단위가 될 때 상호작용을 통해 새로운 특성이 생기기 때문", "하위 단위의 기능이 상위 단위로 그대로 복사되기 때문", "각 단위가 서로 독립적으로 행동하기 때문", "생명체는 에너지를 소모하지 않기 때문"], answer: "하위 단위가 모여 상위 단위가 될 때 상호작용을 통해 새로운 특성이 생기기 때문", explanation: "상호작용을 통한 새로운 속성이 창발성입니다." },
+
+  // --- 2. 생명체의 구성 성분 (components) ---
+  { id: "c-s1", chapterId: "components", type: "short", question: "체내 구성물 중 약 70%로 가장 많이 차지하는 성분은?", answer: "물", explanation: "비열이 높아 체온 유지에 아주 유리합니다." },
+  { id: "c-s2", chapterId: "components", type: "short", question: "효소, 항체, 호르몬, 근육의 주된 구성 성분은?", answer: "단백질", explanation: "단백질은 다양한 기능 분자로 생명체에 필수적입니다." },
+  { id: "c-s3", chapterId: "components", type: "short", question: "단백질을 형성하는 기본 단위체 물질 20여 종을 무엇이라 하나요?", answer: "아미노산", explanation: "아미노산 배열에 따라 수만 종의 단백질이 결정됩니다." },
+  { id: "c-s4", chapterId: "components", type: "short", question: "아미노산들이 연결될 때 물 분자가 빠져나가며 형성되는 공유결합은?", answer: "펩타이드결합", explanation: "탈수축합 반응을 통한 펩타이드결합입니다." },
+  { id: "c-s5", chapterId: "components", type: "short", question: "주로 세포의 주요 에너지원(주원료)으로 쓰이며 포도당 등을 포함하는 유기물은?", answer: "탄수화물", explanation: "주 에너지원인 탄수화물입니다." },
+  { id: "c-s6", chapterId: "components", type: "short", question: "인산, 당, 염기가 1:1:1로 결합된 핵산(DNA, RNA)의 기본 단위는?", answer: "뉴클레오타이드", explanation: "유전 정보를 구성하는 핵심 단위체입니다." },
+  { id: "c-s7", chapterId: "components", type: "short", question: "탄수화물, 단백질, 지질 중 세포막의 주된 성분이며 물에 잘 녹지 않는 것은?", answer: "지질", explanation: "인지질과 지방 형태의 중요한 성분입니다." },
+  { id: "c-s8", chapterId: "components", type: "short", question: "물 분자간에 작용하여 물의 높은 끓는점, 비열을 만드는 결합 양식은?", answer: "수소결합", explanation: "물 분자 사이의 수소결합이 높은 비열의 원인입니다." },
+  { id: "c-s9", chapterId: "components", type: "short", question: "뼈, 치아의 주성분이며 삼투압, pH 조절 등에 관여하는 무기양분은?", answer: "무기염류", explanation: "칼슘, 인, 철 등의 필수 미네랄입니다." },
+  { id: "c-s10", chapterId: "components", type: "short", question: "탄수화물의 한 종류로, 식물의 엽록체에서 광합성 결과 처음 만들어지는 당은?", answer: "포도당", explanation: "단당류인 포도당입니다." },
+  { id: "c-m1", chapterId: "components", type: "multiple", question: "식물세포벽의 뼈대로 단단함을 부여하는 탄수화물의 일종은?", options: ["셀룰로스", "글리코젠", "설탕", "아미노당"], answer: "셀룰로스", explanation: "다당류인 셀룰로스입니다." },
+  { id: "c-m2", chapterId: "components", type: "multiple", question: "다당류인 글리코젠은 동물 체내 어느 부위에 주로 저장되나요?", options: ["신장과 피부", "간과 근육", "폐와 심장", "두뇌 피질"], answer: "간과 근육", explanation: "간과 근육에 포도당 잉여분을 글리코젠 형태로 저장합니다." },
+  { id: "c-m3", chapterId: "components", type: "multiple", question: "아미노산의 종류를 결정짓는 핵심 구조 변수는 무엇인가요?", options: ["가운데 탄소 원자", "수소 원자의 갯수", "카복실기의 위치", "곁사슬(R기)의 종류"], answer: "곁사슬(R기)의 종류", explanation: "R기에 무엇이 오는지에 따라 아미노산 성질이 결정됩니다." },
+  { id: "c-m4", chapterId: "components", type: "multiple", question: "DNA를 이루는 4가지 염기가 아닌 것은?", options: ["A (아데닌)", "G (구아닌)", "C (사이토신)", "U (우라실)"], answer: "U (우라실)", explanation: "우라실(U)은 RNA에만 있고 DNA는 T(타이민)를 가집니다." },
+  { id: "c-m5", chapterId: "components", type: "multiple", question: "세포막을 구성하는 주된 인지질 구조에 대한 설명으로 올바른 것은?", options: ["머리가 소수성, 꼬리는 친수성", "단일층을 형성한다", "친수성 머리 부분과 소수성 꼬리 부분을 갖는다", "지방산이 전혀 없다"], answer: "친수성 머리 부분과 소수성 꼬리 부분을 갖는다", explanation: "머리는 물과 친한 인산, 꼬리는 비친수성 지방산입니다." },
+  { id: "c-m6", chapterId: "components", type: "multiple", question: "다음 중 무기성 염류(무기질)가 체내에서 하는 역할과 관련이 적은 것은?", options: ["뼈와 치아 구조를 구성한다", "중요한 주 에너지원으로 가장 많이 산화된다", "신진대사 조절을 돕는다", "혈액의 삼투압 유지에 기여한다"], answer: "중요한 주 에너지원으로 가장 많이 산화된다", explanation: "에너지원으로 사용되지 않습니다." },
+  { id: "c-m7", chapterId: "components", type: "multiple", question: "DNA와 RNA의 가장 큰 분자 구조적(당) 차이는 무엇인가요?", options: ["당이 포도당이냐, 갈락토오스이냐의 차이", "전하의 유무", "당이 디옥시리보스이냐, 리보스이냐의 차이", "아미노산 결합 서열"], answer: "당이 디옥시리보스이냐, 리보스이냐의 차이", explanation: "DNA는 디옥시리보스, RNA는 리보스 당을 가집니다." },
+  { id: "c-m8", chapterId: "components", type: "multiple", question: "효소가 최적 온도/pH 범위를 벗어날 때 기능을 상실하는 것은 물질의 어떤 특성 때문인가?", options: ["지질의 용해 특성", "물의 기화열", "단백질의 열 및 pH 변성 (2차, 3차 구조 파괴)", "탄수화물의 분해"], answer: "단백질의 열 및 pH 변성 (2차, 3차 구조 파괴)", explanation: "기질특이성을 만드는 단백질의 입체 구조가 변성되기 때문입니다." },
+  { id: "c-m9", chapterId: "components", type: "multiple", question: "콜레스테롤, 성호르몬 등이 속하는 지질의 한 갈래는?", options: ["인지질", "중성지방", "스테로이드", "글리세롤"], answer: "스테로이드", explanation: "성호르몬, 콜레스테롤 등 고리 4개 결합 형태의 지질입니다." },
+  { id: "c-m10", chapterId: "components", type: "multiple", question: "적혈구의 헤모글로빈 중심핵에 있는 원소로 부족 시 빈혈을 유발하는 무기염류는?", options: ["칼슘 (Ca)", "철 (Fe)", "요오드 (I)", "칼륨 (K)"], answer: "철 (Fe)", explanation: "헤모글로빈에 산소가 결합하기 위해 철이 필수적입니다." },
+
+
+  // --- 3. 세포의 구조와 소기관 (cells) ---
+  { id: "cl-s1", chapterId: "cells", type: "short", question: "세포 활동에 필요한 유기물을 산화시켜 에너지원인 ATP를 생산하는 기관은?", answer: "미토콘드리아", explanation: "세포 호흡 발전소 역할을 합니다." },
+  { id: "cl-s2", chapterId: "cells", type: "short", question: "빛에너지를 이용해 이산화탄소와 물로부터 유기물(포도당)을 합성하는 식물의 소기관은?", answer: "엽록체", explanation: "광합성 장소입니다." },
+  { id: "cl-s3", chapterId: "cells", type: "short", question: "막 구조가 없는 알갱이 모양으로 RNA의 정보를 바탕으로 단백질을 합성하는 곳은?", answer: "리보솜", explanation: "단백질 합성 공장입니다." },
+  { id: "cl-s4", chapterId: "cells", type: "short", question: "소포체에서 넘어온 단백질을 분류, 개조, 포장하여 소낭을 통해 분비하는 곳은?", answer: "골지체", explanation: "단백질 배송 센터입니다." },
+  { id: "cl-s5", chapterId: "cells", type: "short", question: "수많은 가수분해 효소를 가져 낡은 소기관 등을 분해(소화)하는 재활용 청소부 기관은?", answer: "리소좀", explanation: "주머니 모양으로 세포 내 소화 담당입니다." },
+  { id: "cl-s6", chapterId: "cells", type: "short", question: "지질을 합성하고 독성 물질 극성화(해독) 반응이 일어나는 리보솜이 없는 매끈한 망상 기관은?", answer: "활면소포체", explanation: "간세포 등에 많이 발달해 있습니다." },
+  { id: "cl-s7", chapterId: "cells", type: "short", question: "식물세포에서 큰 부피를 차지하며 삼투압 조절 및 노폐물 저장을 담당하는 주머니는?", answer: "액포", explanation: "식물에서 성숙할수록 크기가 커지는 중심액포입니다." },
+  { id: "cl-s8", chapterId: "cells", type: "short", question: "DNA와 히스톤 단백질이 감겨 만들어진 구조체로, 분열 준비 시 염색체로 응축되는 핵 내의 막대들은?", answer: "염색사", explanation: "평소에는 풀어진 염색사 상태로 존재합니다." },
+  { id: "cl-s9", chapterId: "cells", type: "short", question: "식물의 세포벽 주성분으로 인체 내에서는 소화효소가 분해할 수 없는 다당류는?", answer: "셀룰로스", explanation: "식물 세포벽의 기본 뼈대입니다." },
+  { id: "cl-s10", chapterId: "cells", type: "short", question: "리보솜이 핵막 근처나 세포질에 떠있지 않고 벽면에 달라붙어 있는 소포체의 이름은?", answer: "조면소포체", explanation: "거친면 소포체(조면소포체) 표면에 붙어있습니다." },
+  { id: "cl-m1", chapterId: "cells", type: "multiple", question: "이동성 세포 골격 중 조직 수축 또는 위족 운동 등에 쓰이는 '가장 얇은 섬유'는?", options: ["관상소관", "중간섬유", "미세소관", "미세섬유(액틴)"], answer: "미세섬유(액틴)", explanation: "액틴은 근육 수축 등을 담당하는 얇은 섬유입니다." },
+  { id: "cl-m2", chapterId: "cells", type: "multiple", question: "세포 분열 시 방추사를 형성하고, 소기관을 끌고 다니는 '가장 굵은 튜브형 세포 뼈대'는?", options: ["마이오신 섬유", "중간 필라멘트", "미세소관", "플라스미드"], answer: "미세소관", explanation: "튜불린 알파, 베타로 이뤄진 관 뼈대입니다." },
+  { id: "cl-m3", chapterId: "cells", type: "multiple", question: "원핵세포(대장균 등)에 대한 설명으로 올바른 것은?", options: ["리보솜이 전혀 없다", "유전물질(DNA)이 세포질에 노출되어 있다", "미토콘드리아가 매우 조밀하다", "명확한 핵막으로 보호받는다"], answer: "유전물질(DNA)이 세포질에 노출되어 있다", explanation: "핵막과 막성 소기관이 없는 것이 주요 특징입니다." },
+  { id: "cl-m4", chapterId: "cells", type: "multiple", question: "분비 단백질이 만들어져 외부로 나가는 올바른 경로는?", options: ["엽록체 -> 액포 -> 세포막", "핵 -> 골지체 -> 리보솜 -> 소낭", "리보솜(조면소포체) -> 소포체내 수송 -> 골지체 -> 소낭 -> 세포막", "리소좀 -> 활면소포체 -> 세포벽"], answer: "리보솜(조면소포체) -> 소포체내 수송 -> 골지체 -> 소낭 -> 세포막", explanation: "만들어지고(리보솜), 거쳐서(소포체), 각인 포장되어(골지체), 나갑니다(소낭)." },
+  { id: "cl-m5", chapterId: "cells", type: "multiple", question: "식물세포에만 고유하게 관찰되는 특징 세 가지의 묶음은?", options: ["미토콘드리아, 골지체, 세포막", "진핵막, 효소기질, 리소좀", "세포벽, 엽록체, (큰) 액포", "리보솜, 중심체, 세포벽"], answer: "세포벽, 엽록체, (큰) 액포", explanation: "동물에게는 없는 식물 특이 지표들입니다." },
+  { id: "cl-m6", chapterId: "cells", type: "multiple", question: "소포체에 대한 설명 중 틀린 것은?", options: ["핵막과 연결된 튜브 또는 납작한 주머니 형태이다", "조면소포체에는 리보솜이 붙어 있다", "단백질의 이동 통로 역할을 단독 수행한다", "스스로 직접 단계를 걸쳐 새로운 DNA 원본을 만들어낸다"], answer: "스스로 직접 단계를 걸쳐 새로운 DNA 원본을 만들어낸다", explanation: "DNA 원본복제는 오로지 핵 안에서만 일어납니다." },
+  { id: "cl-m7", chapterId: "cells", type: "multiple", question: "단핵 생물 세포 내 DNA의 위치로 가장 보편적인 곳은 진핵세포 기준으로 어디인가요?", options: ["세포막과 세포질 사이", "미세소관 내부", "핵(Nucleus) 내부", "리소좀 소낭 안"], answer: "핵(Nucleus) 내부", explanation: "유전 정보의 본체인 설계도는 핵 안에 안전히 갇혀 있습니다." },
+  { id: "cl-m8", chapterId: "cells", type: "multiple", question: "미토콘드리아와 엽록체의 공통점이 아닌 것은?", options: ["자가 DNA를 보유한다", "2중막 구조이다", "독자적 리보솜을 갖고 있다", "동식물 세포 모두에 기본으로 존재한다"], answer: "동식물 세포 모두에 기본으로 존재한다", explanation: "엽록체는 식물 등 일부에서만 존재합니다." },
+  { id: "cl-m9", chapterId: "cells", type: "multiple", question: "어떤 세포가 분비 기능 (소화효소 분배, 호르몬 생성 등)이 유독 활발하다면 가장 발달해 있을 기관은?", options: ["골지체와 조면소포체", "리소좀과 액포", "중심체와 방추사", "핵소체"], answer: "골지체와 조면소포체", explanation: "단백질 분해/분비 경로는 췌장, 내분비선 등에서 엄청나게 발달합니다." },
+  { id: "cl-m10", chapterId: "cells", type: "multiple", question: "세포 골격(미세소관 등)의 핵심 역할이 아닌 것은?", options: ["소기관들의 위치를 입체적으로 고정, 유지시킨다.", "방추사를 형성하여 염색체를 이동시킨다.", "리보솜 안에서 아미노산 서열을 암호화한다.", "세포 전체의 모형을 견고하게 만든다."], answer: "리보솜 안에서 아미노산 서열을 암호화한다.", explanation: "세포골격은 물리적 뼈대이며 유전 암호 관여는 무관합니다." },
+
+
+  // --- 4. 세포막과 물질의 이동 (transport) ---
+  { id: "t-s1", chapterId: "transport", type: "short", question: "세포막을 구성하는 주된 인지질 이중층 내부에 듬성듬성 끼어있는 성분은 주로 무엇인가요?", answer: "막단백질", explanation: "막 단백질은 물질 이동 통로, 수용체 등 핵심 기능을 합니다." },
+  { id: "t-s2", chapterId: "transport", type: "short", question: "산소, 이산화탄소처럼 작고 지용성인 물질이 통로 도움 없이 막을 그냥 뚫고 고농도에서 저농도로 이동하는 현상은?", answer: "단순확산", explanation: "주로 가스나 매우 작은 분자들의 움직임입니다." },
+  { id: "t-s3", chapterId: "transport", type: "short", question: "반투과성막을 사이에 두고 '물(용매)'이 스스로 농도를 맞추러 저농도에서 고농도 용액 쪽으로 이동하는 현상은?", answer: "삼투", explanation: "용액 농도 평형을 맞추기 위한 수동적 물 이동입니다." },
+  { id: "t-s4", chapterId: "transport", type: "short", question: "통로 단백질이나 운반 단백질을 이용하지만 에너지는 쓰지 않고 물질을 농도 기울기(고->저)에 따라 분출하는 확산은?", answer: "촉진확산", explanation: "포도당, 아미노산 등 수용성 덩치 큰 물질들이 단백질 문을 통해 통과할 때 쓰입니다." },
+  { id: "t-s5", chapterId: "transport", type: "short", question: "ATP 에너지를 강제로 사용하여 저농도에서 고농도로, 기울기에 반하여 펌프질하는 물질 수송 방식은?", answer: "능동수송", explanation: "강제적 나트륨-칼륨 펌프 들이 해당합니다." },
+  { id: "t-s6", chapterId: "transport", type: "short", question: "대형 분자나 세균 덩어리를 막이 감싸 소낭을 형성해 세포 안으로 삼키는 작용은?", answer: "내포작용", explanation: "식세포(균 먹기), 음세포 작용을 일컫습니다." },
+  { id: "t-s7", chapterId: "transport", type: "short", question: "내포와 반대로 덩어리가 큰 물질을 감싼 소낭이 막과 융합하여 외부로 토해내는 배출 작용을 무엇이라 하나요?", answer: "외포작용", explanation: "세포외 배출 작용이라고도 합니다." },
+  { id: "t-s8", chapterId: "transport", type: "short", question: "세포막의 단백질과 유동하는 인지질 층 바깥쪽에 붙어 암, 세균 감별 등 세포끼리의 '신분증/촉각' 역할을 하는 물질은?", answer: "당사슬", explanation: "당단백질이나 당지질이 세포 인식에 기여합니다." },
+  { id: "t-s9", chapterId: "transport", type: "short", question: "적혈구가 외부의 낮은 농도(저장액) 때문에 물을 과도하게 흡수하다가 부풀어 마침내 터져버리는 현상은?", answer: "용혈현상", explanation: "동물세포는 세포벽이 없어 삼투압에 의해 막이 터지게 됩니다." },
+  { id: "t-s10", chapterId: "transport", type: "short", question: "식물세포가 고장액에 빠졌을 때, 물이 빠져나가 세포막이 두꺼운 세포벽과 분리되는 현상은 무엇인가요?", answer: "원형질분리", explanation: "내용물이 쭈그러들면서 단단한 벽 안쪽에서 막이 뜯어집니다." },
+  { id: "t-m1", chapterId: "transport", type: "multiple", question: "촉진 확산과 능동 수송의 결정적인 차이는 무엇인가요?", options: ["막 단백질의 관여 여부", "수용성 및 지용성 여부", "이완 상태의 진입 차이", "에너지(ATP) 소모 및 농도 억지력(저->고 방향)"], answer: "에너지(ATP) 소모 및 농도 억지력(저->고 방향)", explanation: "능동수송은 역주행을 위해 에너지를 씁니다." },
+  { id: "t-m2", chapterId: "transport", type: "multiple", question: "적혈구를 사람의 체액보다 더 진한 소금물(고장액)에 넣었을 때 일어나는 올바른 결과는?", options: ["모양 변화 없음", "물이 들어와 부풀어 오름", "세포막이 견디지 못하고 터짐", "물이 바깥으로 빠져나가 쭈그러듦"], answer: "물이 바깥으로 빠져나가 쭈그러듦", explanation: "물이 농도를 맞추려 밖으로 대거 유출됩니다." },
+  { id: "t-m3", chapterId: "transport", type: "multiple", question: "삼투압 현상에서 물 분자 한 개 한 개가 지나다니는 전용 통로 단백질의 이름은 무엇인가요? (심화)", options: ["아쿠아포린", "플라스미드", "이온펌프", "액틴세관"], answer: "아쿠아포린", explanation: "물의 촉진 확산을 돕는 전용 막통로입니다." },
+  { id: "t-m4", chapterId: "transport", type: "multiple", question: "세포막 모델에서 막단백질들은 바다에 둥둥 떠 있는 배처럼 고정되어 있지 않고 일정 수준으로 이동할 수 있다는 유동성 이론의 명칭은?", options: ["단백질 단결정 모델", "유동모자이크 모델", "막전위 팽창 모델", "점탄성 이원론"], answer: "유동모자이크 모델", explanation: "막은 유동적인 모자이크 벽돌처럼 배열되어 있다는 학설입니다." },
+  { id: "t-m5", chapterId: "transport", type: "multiple", question: "세포 안팎의 나트륨/칼륨 농도차를 강제로 유지하기 위한 대표적인 이동 방식은?", options: ["외포 작용", "능동 수송", "단순 확산", "촉진 삼투 작용"], answer: "능동 수송", explanation: "에너지를 써서 나트륨을 내보내고 칼륨을 들입니다." },
+  { id: "t-m6", chapterId: "transport", type: "multiple", question: "단순확산이 가장 빠르고 활발하게 일어나기 위한 조건으로 거리가 먼 것은?", options: ["분자 크기가 매우 작아야 한다.", "기름과 친한 지용성이어야 한다.", "농도 차가 극심해야 한다.", "막의 두께가 매우 두꺼워야 한다."], answer: "막의 두께가 매우 두꺼워야 한다.", explanation: "막 두께가 통과 경로이므로, 얇아야 저항없이 통과합니다." },
+  { id: "t-m7", chapterId: "transport", type: "multiple", question: "식세포 작용을 하는 동물 체내의 대표적인 면역 세포는?", options: ["백혈구 (대식세포)", "적혈구", "근육세포", "혈소판체"], answer: "백혈구 (대식세포)", explanation: "외부 세균을 삼키는 대식 작용이 주 임무입니다." },
+  { id: "t-m8", chapterId: "transport", type: "multiple", question: "확산 속도에 영향을 미치는 물리적 요인이 아닌 것은?", options: ["분자의 질량 및 크기", "용매의 온도", "세포 골격의 배열 상태 (액틴 유무)", "농도 기울기 격차 (차이 수준)"], answer: "세포 골격의 배열 상태 (액틴 유무)", explanation: "세포골격은 분자의 확산 자체 구동 요소와는 거리가 멉니다." },
+  { id: "t-m9", chapterId: "transport", type: "multiple", question: "식물세포가 저장액에 들어가 빵빵하게 최대로 팽창하여 탄력을 유지하지만 용혈(터짐)되지 않는 근본 이유는?", options: ["미토콘드리아가 물을 증발시킴", "엽록체가 물을 포도당으로 결합시킴", "외투깥을 감싸는 단단한 보강재, 세포벽의 팽압 지지력 때문", "핵이 수분을 흡수해서"], answer: "외투깥을 감싸는 단단한 보강재, 세포벽의 팽압 지지력 때문", explanation: "견고한 셀룰로스 세포벽이 터짐을 막습니다." },
+  { id: "t-m10", chapterId: "transport", type: "multiple", question: "세포내 편입 반응 중 덩어리 고체가 아닌 액체 물질(용액성 용질)을 주로 삼투성이 아닌 막 분화 작용으로 빨아들이는 것은?", options: ["식세포 작용 (Phagocytosis)", "음세포 작용 (Pinocytosis)", "능동 펌프 작용", "단순 삼투 용해"], answer: "음세포 작용 (Pinocytosis)", explanation: "음세포(pino)는 Cell-drinking 으로 액체성 물질들을 마시듯 흡입하는 소낭 작용입니다." },
+
+
+  // --- 5. 효소와 항상성 (enzymes) ---
+  { id: "e-s1", chapterId: "enzymes", type: "short", question: "효소가 반응 속도를 놀라울 정도로 향상시키기 위해 낮추어 주는 요소는?", answer: "활성화에너지", explanation: "안정 상태 문턱 높낮이를 조절합니다." },
+  { id: "e-s2", chapterId: "enzymes", type: "short", question: "체온, 혈당, 수분 등을 외부 환경의 극한 변화와 무관하게 좁은 일상 범위로 강력하게 묶어두려는 성질은?", answer: "항상성", explanation: "자율신경계와 호르몬의 협업입니다." },
+  { id: "e-s3", chapterId: "enzymes", type: "short", question: "효소가 특정 모양이 딱 맞아 떨어지는 '단 하나의 기질' 하고만 결합하여 반응하는 특징은?", answer: "기질특이성", explanation: "잠물쇠와 알맞은 열쇠로만 열리는 것과 같습니다." },
+  { id: "e-s4", chapterId: "enzymes", type: "short", question: "효소가 열이 높거나 극단적인 산성도(pH)에 만나 입체모양이 파괴되고 기능 상실하는 것을 일컫는 말은?", answer: "변성", explanation: "단백질의 입체 구조가 녹아내렸기 때문입니다." },
+  { id: "e-s5", chapterId: "enzymes", type: "short", question: "효소와 기질이 딱 맞물려 착 달라붙은 상태를 무엇이라 부르나요?", answer: "효소기질복합체", explanation: "반응이 일어나는 아주 찰나의 결착점입니다." },
+  { id: "e-s6", chapterId: "enzymes", type: "short", question: "인체의 건강한 혈액의 pH는 소수점 1자리로 표현할 때 어느 정도 수치인가요?", answer: "7.4", explanation: "7.4 부근인 약염기를 엄격히 조절합니다." },
+  { id: "e-s7", chapterId: "enzymes", type: "short", question: "효소가 화학 반응이 완전히 끝나 결과물을 뱉어낸 뒤, 파괴되어 사라지지 않고 다시 사용되는 성질은?", answer: "재사용성", explanation: "자신은 소진되지 않습니다." },
+  { id: "e-s8", chapterId: "enzymes", type: "short", question: "생명체 내부에서 일어나는 모든 형태의 효소 촉매 화학반응 전체를 통틀어 이르는 단어는?", answer: "물질대사", explanation: "Metabolism 체내 화학 공정입니다." },
+  { id: "e-s9", chapterId: "enzymes", type: "short", question: "식사 후 증가한 혈당량을 낮추기 위해 이자액의 세포에서 분비되는 호르몬은?", answer: "인슐린", explanation: "인슐린은 글리코젠 합성을 유도해 혈당을 내립니다." },
+  { id: "e-s10", chapterId: "enzymes", type: "short", question: "활성화 에너지를 오히려 '높여서' 반응 속도를 늦추게 만드는 방해 촉매를 무엇이라 부르나요?", answer: "부촉매", explanation: "생체 효소는 주로 속도를 올리는 정촉매지만 인공 부촉매도 존재합니다." },
+  { id: "e-m1", chapterId: "enzymes", type: "multiple", question: "우리 몸에서 이뤄지는 거의 모든 생화학반응인 '물질대사'의 두 가지 큰 줄기는 무엇인가?", options: ["소화 작용, 배설 작용", "동화 작용, 이화 작용", "생성 작용, 산화 작용", "단순 파괴, 능동 합성"], answer: "동화 작용, 이화 작용", explanation: "합성하는 동화, 분해하는 이화로 구성됩니다." },
+  { id: "e-m2", chapterId: "enzymes", type: "multiple", question: "온도가 지나치게 높아지면(예: 60도 이상) 체내 효소는 어떻게 되나요?", options: ["반응속도가 무한대로 상승한다.", "산성으로 강하게 변하여 기질을 녹여버린다.", "입체 구조의 단백질이 파괴(변성)되어 촉매 기능을 완전히 상실한다.", "에너지를 방출해 주변을 끓인다."], answer: "입체 구조의 단백질이 파괴(변성)되어 촉매 기능을 완전히 상실한다.", explanation: "단백질이 변성되면 기질과 아예 자물쇠구멍이 맞지 않게 됩니다." },
+  { id: "e-m3", chapterId: "enzymes", type: "multiple", question: "다음 중 항상성 작용과 가장 거리가 먼 인체 조절 현상은 무엇인가요?", options: ["더우면 땀을 배출해 수기화 열로 체온을 떨어뜨린다.", "밥을 많이 먹으면 인슐린이 혈당 수치를 정상치로 끌어내린다.", "머리를 자주 감으면 머리카락이 빠르게 자란다.", "추우면 몸이 바르르 떨려 열을 생산한다."], answer: "머리를 자주 감으면 머리카락이 빠르게 자란다.", explanation: "생리학적 상시 생존 유도 기능이 아닌 모낭 활동 영역입니다." },
+  { id: "e-m4", chapterId: "enzymes", type: "multiple", question: "효소가 활성화 에너지를 낮춘다는 말의 가장 실제적인 이점은?", options: ["인체가 1,000도 이상의 고열 화염에서 견디도록 돕는다.", "신체 체온 정도의 낮은 온도에서도 반응이 폭발적으로, 신속하게 일어날 수 있게 해준다.", "섭취한 음식이 에너지를 흡수하는 반응으로만 일어나도록 막는다.", "외부 기생 벌레를 모두 죽인다."], answer: "신체 체온 정도의 낮은 온도에서도 반응이 폭발적으로, 신속하게 일어날 수 있게 해준다.", explanation: "만약 효소가 없다면 밥알 한톨을 분해하는데 수십 년, 수백 도씨가 필요할 것입니다." },
+  { id: "e-m5", chapterId: "enzymes", type: "multiple", question: "펩신은 위액에 많이 들어있습니다. 펩신의 최고 능률 최적 pH 지수는 대략 산성 상태인 얼마 부근일까요?", options: ["pH 12", "pH 7.4 중성", "pH 2 강산성", "pH 8"], answer: "pH 2 강산성", explanation: "위액은 염산(강산) 성분이므로, 펩신의 최적 pH도 2 부근입니다." },
+  { id: "e-m6", chapterId: "enzymes", type: "multiple", question: "에너지를 흡수하며 작고 간단한 분자들이 모여 크고 복잡하게 조직되는 물질대사인 동화작용의 대표적인 예는?", options: ["우리가 매끼니 먹는 소화 작용", "세포의 호흡 운동 반응", "식물이 햇빛아래 영양분을 창조하는 광합성 반응", "근육에 젖산이 쌓이는 분해"], answer: "식물이 햇빛아래 영양분을 창조하는 광합성 반응", explanation: "광합성은 물,이산화탄소가 모여 덩치 큰 포도당을 만들어내는 거대 동화 작용입니다." },
+  { id: "e-m7", chapterId: "enzymes", type: "multiple", question: "효소의 주성분이 단백질이기 때문에 발생되는 대표적인 효소만의 취약점은 성질은 어디에서 비롯되나요?", options: ["열과 산성도(pH) 공격에 형태가 쉽게 녹아버리는 것", "모든 기질과 아무렇게나 잘 반응하는 것", "지방을 만났을 때 바로 기화되는 것", "단단한 갑각 구조를 형성하려다 멈추는 것"], answer: "열과 산성도(pH) 공격에 형태가 쉽게 녹아버리는 것", explanation: "단백질 수소 결합들은 고온, 비이상 pH 등에 매우 가볍고 연약한 탓입니다." },
+  { id: "e-m8", chapterId: "enzymes", type: "multiple", question: "체내 삼투압(농도)을 조절할 때 가장 깊이 관여하는 기관계 두 곳은 어디인가?", options: ["소화계와 호흡계", "신경계와 뼈근육계", "내분비계(호르몬) 와 배설계(신장)", "생식계와 림프순환계"], answer: "내분비계(호르몬) 와 배설계(신장)", explanation: "이뇨 작용 억제 호르몬(ADH)과 신장의 미세 재흡수를 통해 수분을 조절합니다." },
+  { id: "e-m9", chapterId: "enzymes", type: "multiple", question: "반응물보다 생성물이 가진 에너지가 더 낮아, 남는 에너지 격차를 바깥으로 발산하는 화학반응을 무엇이라 하는가?", options: ["광합성", "열 발산 금지 반응", "발열 반응 (이화 작용)", "물질 침강 작용"], answer: "발열 반응 (이화 작용)", explanation: "세포 호흡이나 소화 같이 부수면서 에너지가 방출되는 발열이 대표적입니다." },
+  { id: "e-m10", chapterId: "enzymes", type: "multiple", question: "과산화수소(상처 소독약)를 분해하여 물과 산소 거품으로 만드는 데 쓰이는 간, 감자에 많은 효소는?", options: ["아밀레이스", "카탈레이스", "라이페이스", "트립신"], answer: "카탈레이스", explanation: "생체 내 유해 산물을 정화해주는 거품을 일으키는 대표적 효소입니다." },
+
+  // --- 6. 세포 주기와 세포 분열 (division) ---
+  { id: "d-s1", chapterId: "division", type: "short", question: "감수 분열 시에 한 쌍의 상동 염색체끼리 찰싹 달라 붙어 이루어진 4가닥, 즉 4분체 쌍을 이르는 말은?", answer: "2가염색체", explanation: "2가 염색체는 곧 감수 분열의 상징적 형태입니다." },
+  { id: "d-s2", chapterId: "division", type: "short", question: "간기 중 생장 1기(G1)를 지나 분열하기 위해 본체의 설계도인 DNA 원본을 2배 복제하는 그 특별한 시기의 기호는?", answer: "S기", explanation: "합성(Synthesis) 시기입니다." },
+  { id: "d-s3", chapterId: "division", type: "short", question: "체세포 분열 과정의 중기에, 세포 정중앙의 가장 알기 쉬운 적도 부분에 일렬로 늘어선 염색체를 양극으로 당기는 가는 줄은?", answer: "방추사", explanation: "스핀들 파이버라고 불리우며 양 끝으로 끌어줍니다." },
+  { id: "d-s4", chapterId: "division", type: "short", question: "상동 염색체끼리 달라붙은 부위에서 무작위적인 교환과 서열 변조가 일어나 생물군의 유전적 다양성을 보장하는 이 이음새 명칭은?", answer: "키아즈마", explanation: "교차(재조합)가 일어나는 마디 부위의 명칭입니다." },
+  { id: "d-s5", chapterId: "division", type: "short", question: "분열이 일어날 때, 염색체의 중앙 잘록한 허리 부분으로 방추사가 정확히 부착되는 부위를 무엇이라 부르나요?", answer: "동원체", explanation: "동원체에 방추사 실이 걸립니다." },
+  { id: "d-s6", chapterId: "division", type: "short", question: "사람의 46개 염색체 중, 남녀 상관없이 동일하게 생긴 평범한 상염색체는 몇 쌍(몇 개) 인가요?", answer: "22쌍", explanation: "총 23쌍 중 22쌍은 상염색체, 남은 1쌍은 성염색체입니다." },
+  { id: "d-s7", chapterId: "division", type: "short", question: "두 번 연속 분열하여 최종적으로 결과물 세포를 4개 배출하고 염색체 수가 반(n)으로 뚝 떨어지는 분열의 방식은?", answer: "감수분열", explanation: "정자, 난자를 만드는 특수 생식세포 분열입니다." },
+  { id: "d-s8", chapterId: "division", type: "short", question: "체세포 분열에서 두 개로 분리된 핵막이 다시 나타나고 염색체가 염색사로 풀리는 가장 마지막 시기는?", answer: "말기", explanation: "분열의 종료를 알리는 시기입니다." },
+  { id: "d-s9", chapterId: "division", type: "short", question: "식물세포의 체세포 분열 말기에, 동물세포처럼 막이 쪼그라들지 못하고 중앙에 뼈대가 나뉘어 세워지는 분할판 형성을 무엇이라 하는가?", answer: "세포판", explanation: "식물은 세포벽 때문에 세포판이 안에서 바깥으로 만들어집니다." },
+  { id: "d-s10", chapterId: "division", type: "short", question: "G1, S, G2기를 막론하고 분열하지 않는, 세포 주기의 대부분(90% 이상)을 차지하는 시기의 이름은?", answer: "간기", explanation: "세포 분열을 준비하고 휴식하는 가장 긴 구간입니다." },
+  { id: "d-m1", chapterId: "division", type: "multiple", question: "1가닥의 DNA 염색사가 X자 형태 염색체로 꾸려질 때, 두 갈래의 각각의 막대기를 일컫는 용어는?", options: ["동원분체", "염색분체", "나선사", "2가염색체"], answer: "염색분체", explanation: "X자 중 한 쪽 날개를 염색 분체라 불리웁니다." },
+  { id: "d-m2", chapterId: "division", type: "multiple", question: "체세포 분열의 설명으로 틀린 것은?", options: ["몸을 키우는 생장 등의 목적이다", "상처 조직 땜빵, 재생이 이뤄진다.", "정자, 난자를 제조하는 과정이다.", "딸세포가 모세포와 완벽히 동일한 체제(2n)이다."], answer: "정자, 난자를 제조하는 과정이다.", explanation: "생식, 자손 증식 목적은 생식세포 분열(감수 분열)입니다." },
+  { id: "d-m3", chapterId: "division", type: "multiple", question: "세포 주기의 올바른 진행 루틴 순서는?", options: ["DNA 복제(S) → 분열기(M) → 생장기1(G1)", "분열기(M) → DNA복제(S) → G2", "G1기 → S기 → G2기 → 분열기(M)", "G2기 → G1기 → S → 분열기(M)"], answer: "G1기 → S기 → G2기 → 분열기(M)", explanation: "자라나고(G1), 복제하고(S), 더 자라 준비를 마치고(G2) 분열(M)합니다." },
+  { id: "d-m4", chapterId: "division", type: "multiple", question: "감수 1분열 과정에서 가장 중요하게 '양극으로 뜯어져 분리되는 것'은 무엇인가요?", options: ["염색분체 조각들", "상동염색체 자체가 이혼하듯 찢어짐", "단백질 중심체", "동원체가 파열됨"], answer: "상동염색체 자체가 이혼하듯 찢어짐", explanation: "1분열: 상동 분리 / 2분열: X자의 염색 분체 쪼개짐입니다." },
+  { id: "d-m5", chapterId: "division", type: "multiple", question: "분열 단계의 중기(Metaphase) 때 현미경 관찰 시 가장 두드러지게 구분이 되는 특징은 무엇인가?", options: ["염색체가 핵 껍데기에 다 싸여있다", "염색체가 정중앙 적도면에 한 줄로 예쁘게 정렬되어 있다.", "아직 염색사 실가닥 상태이다.", "딸세포 2개가 서로 벽을 세워 막을 치고 있다."], answer: "염색체가 정중앙 적도면에 한 줄로 예쁘게 정렬되어 있다.", explanation: "가운데 정렬(Middle)되어 염색체 관찰이 가장 쉽고 모양 크기를 살피는 적기입니다." },
+  { id: "d-m6", chapterId: "division", type: "multiple", question: "남성의 성염색체 구성으로 올바른 텍스트 조합은?", options: ["XX", "YY", "XY", "XXY"], answer: "XY", explanation: "여성은 XX이며, 남성은 XY로 성을 결정짓는 핵심입니다." },
+  { id: "d-m7", chapterId: "division", type: "multiple", question: "세포가 분열하여 생명을 지속하기 위해 끊임없이 주기를 돌릴 때 대부분의 인생 시간을 보내는 단계는?", options: ["분열기 전기 (Prophase)", "간기 (Interphase / G1,S,G2)", "분열기 후기", "세포질 분열 마감기"], answer: "간기 (Interphase / G1,S,G2)", explanation: "분열 준비에 소요되는 간기가 주기 중 90% 이상 거의 수명 파이를 차지합니다." },
+  { id: "d-m8", chapterId: "division", type: "multiple", question: "감수 2분열의 양상으로 올바른 설명은?", options: ["DNA가 다시 S기를 거쳐 한번 더 두배 뻥튀기 된다.", "상동 염색체가 2번 분리된다.", "염색체의 중앙이 찢어지며(염색분체 분리) 염색체 수(=n)는 그대로 유지된다.", "핵막이 아예 사라지지 않는다."], answer: "염색체의 중앙이 찢어지며(염색분체 분리) 염색체 수(=n)는 그대로 유지된다.", explanation: "2분열은 체세포분열과 거의 동일하게 염색분체만 분리되므로 핵상 수(n)는 변화없습니다." },
+  { id: "d-m9", chapterId: "division", type: "multiple", question: "분열기 후기에 방추사가 점점 짧아지며 일어나는 현상은?", options: ["세포막이 융합된다", "염색체가 양쪽 극단으로 끌려간다", "DNA가 소실된다", "미토콘드리아가 정지한다"], answer: "염색체가 양쪽 극단으로 끌려간다", explanation: "끌어당기는 시기로 염색체가 V자 모양으로 갈라져 이동합니다." },
+  { id: "d-m10", chapterId: "division", type: "multiple", question: "양파 뿌리 끝 세포분열 등 실험에서 주로 관찰 용액으로 쓰이며 뚜렷이 붉거나 보라색으로 세포핵을 염색시켜주는 색소염색약 이름은?", options: ["아세트산카민", "아이오딘-녹말액", "수단3액", "뷰렛용액"], answer: "아세트산카민", explanation: "양파 및 식물세포의 핵을 붉게 물들이는 염색제입니다." },
+
+  // --- 7. 유전 정보의 흐름 (central dogma) ---
+  { id: "cd-s1", chapterId: "central-dogma", type: "short", question: "DNA 나선의 정보만 따로 간편하게 복사하는 작업으로, 핵 내부에서 DNA 틀을 베껴가며 RNA를 찍어내는 행위는?", answer: "전사", explanation: "Transcription이라 하며 DNA -> RNA 과정입니다." },
+  { id: "cd-s2", chapterId: "central-dogma", type: "short", question: "핵 밖(세포질 측) 단백질 공장인 리보솜에서 mRNA 암호 지시를 해독하고 알맞은 아미노산들을 끼워맞춰내는 제조 과정의 이름은?", answer: "번역", explanation: "Translation이라 하며 정보가 물리적인 단백질 폴리로 출력됩니다." },
+  { id: "cd-s3", chapterId: "central-dogma", type: "short", question: "핵 내부의 설계도 원본을 싣고 리보솜까지 정보만 따로 배달하러 탈출하는 그 전령 역할의 RNA 명칭은?", answer: "mRNA", explanation: "메신저(전령) RNA입니다." },
+  { id: "cd-s4", chapterId: "central-dogma", type: "short", question: "단백질 재료인 떠다니는 아미노산 짐짝들을 자기 등에 업어지고 번역 중인 리보솜의 배송지 코돈 소켓까지 가져다 꽂아주는 RNA는?", answer: "tRNA", explanation: "트랜스퍼(운반) RNA 입니다." },
+  { id: "cd-s5", chapterId: "central-dogma", type: "short", question: "보통 mRNA 측의 연속된 3개의 염기 문장 암호가 한 세트를 이뤄 1종류의 아미노산을 호출하는 이 암호 코드를 무엇이라 부르나요?", answer: "코돈", explanation: "각각 서로 다른 조합으로 여러 아미노산을 지정하는 Codon 입니다." },
+  { id: "cd-s6", chapterId: "central-dogma", type: "short", question: "유전 정보가 역방향 없이 'DNA -> RNA -> 단백질'이라는 일방향 룰대로 수천 년 흘러왔다는 분자 생물학 중심 학설은?", answer: "중심원리", explanation: "센트럴 도그마로 일컫습니다." },
+  { id: "cd-s7", chapterId: "central-dogma", type: "short", question: "유전자를 결정짓는 생명 언어인 RNA 4개의 염기 중 우라실(U)은 DNA의 어떤 염기 자리를 대체한 돌연변이 방지책인가요?", answer: "타이민", explanation: "알파벳 T자리, 타이민(Thymine) 대신 U(우라실)가 박힙니다." },
+  { id: "cd-s8", chapterId: "central-dogma", type: "short", question: "전사를 담당하는 주요 단백질 효소의 이름은 무엇인가요?", answer: "RNA중합효소", explanation: "DNA를 주형으로 RNA 가닥을 만들어내는 중합 효소입니다." },
+  { id: "cd-s9", chapterId: "central-dogma", type: "short", question: "tRNA에서 mRNA의 코돈과 상보적으로 들어맞는 3개의 안티(방어) 서열 파트를 무엇이라 하는가?", answer: "안티코돈", explanation: "코돈과 짝이 되어 아미노산을 정확히 배치시키는 부위입니다." },
+  { id: "cd-s10", chapterId: "central-dogma", type: "short", question: "단백질 합성 지시를 마치는 역할로 아무 아미노산도 지정하지 않는 3개의 코돈 UAA, UAG, UGA 를 이르는 용어는?", answer: "종결코돈", explanation: "합성 작업의 종료를 알리는 멈춤 신호 암호입니다." },
+  { id: "cd-m1", chapterId: "central-dogma", type: "multiple", question: "중심 원리 흐름도에서 정보가 처음으로 다른 언어형태(염기 서열 -> 아미노산 서열)로 체계 전환이 터지는 기점은 어느 단계인가?", options: ["DNA 자가 복제", "RNA 전사 복구", "리보솜 번역", "세포 간 소낭 통신"], answer: "리보솜 번역", explanation: "번역 단계에서 염기 문자가 아미노산이라는 물질 문법으로 완전 번역체계가 일어납니다." },
+  { id: "cd-m2", chapterId: "central-dogma", type: "multiple", question: "DNA 본체의 이중나선 가닥 서열이 'A-A-C-G-T'일 때, RNA로 전사된 상보적 전사물 사본의 가닥 서열은?", options: ["U-U-G-C-A", "T-T-G-C-A", "U-T-C-G-U", "A-A-C-G-U"], answer: "U-U-G-C-A", explanation: "A->U, C->G, G->C, T->A 로 대응됩니다." },
+  { id: "cd-m3", chapterId: "central-dogma", type: "multiple", question: "센트럴 도그마 체계의 가장 중대한 최종적인 산출물로 우리 몸의 효소, 조직, 호르몬 등을 다루는 분자는?", options: ["포도당 사슬체", "인산 화합물질 모음", "기능성을 갖춘 입체 단백질", "콜레스테롤 외벽강화막"], answer: "기능성을 갖춘 입체 단백질", explanation: "단백질이 곧 인체를 구성하고 인체를 기동시키는 핵심 분자기계입니다." },
+  { id: "cd-m4", chapterId: "central-dogma", type: "multiple", question: "다음 설명 중 틀린 오류가 들어간 문장은?", options: ["모든 DNA 유전자 정보는 반드시 전사 과정을 한 번 거친 뒤 단백질이 되어야 한다.", "1개의 코돈은 보통 1개의 아미노산을 지정한다.", "전사는 세포질 넓은 공간 어디서든 무작위로 복사본을 찍어낸다.", "tRNA는 아미노산을 운반해오는 특수한 일꾼이다."], answer: "전사는 세포질 넓은 공간 어디서든 무작위로 복사본을 찍어낸다.", explanation: "전사는 설계본을 보호하기 위해 오직 '핵' 내부 안전금고 안에서만 일어납니다." },
+  { id: "cd-m5", chapterId: "central-dogma", type: "multiple", question: "아미노산을 지정하기 위해 필요한 3쌍의 염기조합 즉, 코돈의 총 가능 수학적 조합 가짓수는 모두 몇 종류인가요?", options: ["16개 (4^2)", "20개 (아미노산 종류와 동일)", "64개 (4^3)", "4개 (염기 개수와 동일)"], answer: "64개 (4^3)", explanation: "4개의 염기가 3자리에 독립적으로 올 수 있으므로 4의 3승인 64종류 코드가 나옵니다." },
+  { id: "cd-m6", chapterId: "central-dogma", type: "multiple", question: "만약 코돈 암호 해석상에 돌연변이나 오류가 발생해 잘못된 아미노산이 줄을 서면 어떤 결과가 초래되나요?", options: ["모든 경우 완전히 기능이 우수한 초인적 단백질로 진화한다.", "정상적인 입체 구조를 접지 못하고 망가진 불량 단백질 적혈구(镰刀)등이 발생한다.", "RNA가 다시 거꾸로 DNA 원본을 스스로 자가 수리한다.", "세포벽이 무한 증식한다."], answer: "정상적인 입체 구조를 접지 못하고 망가진 불량 단백질 적혈구(镰刀)등이 발생한다.", explanation: "아미노산 배열 오류는 치명적인 변성, 불량 입체 구조를 야기해 겸형(낫모양) 적혈구 빈혈증 같은 유전병을 유발합니다." },
+  { id: "cd-m7", chapterId: "central-dogma", type: "multiple", question: "번역 단계를 수행하는 미세한 공장 역할의 세포 소기관은 무엇이라 일컫는가?", options: ["중심액포 창고", "핵막", "리보솜", "리소좀"], answer: "리보솜", explanation: "모든 단백질 결합 과정은 구 형태의 리보솜 소단위 틈새에서 조립됩니다." },
+  { id: "cd-m8", chapterId: "central-dogma", type: "multiple", question: "유전자 발현 (번역 단계)의 맨 처음 깃발을 내리는 의미로, 아미노산 '메싸이오닌'을 지정하는 개시 코돈 3글자는 주로 무엇인가?", options: ["UAG", "AUG", "UAA", "CCC"], answer: "AUG", explanation: "AUG는 메싸이오닌을 부르며 항상 번역을 시작하는 개시 코돈입니다." },
+  { id: "cd-m9", chapterId: "central-dogma", type: "multiple", question: "RNA의 단일 가닥은 무엇을 뼈대로 삼고 연결되어 있나?", options: ["당-인산 골격", "아미노산 다발 체인", "염화나트륨 이온 결합선", "펩타이드 결합"], answer: "당-인산 골격", explanation: "핵산은 바깥쪽이 당과 인산으로 매우 강력하게 공유결합된 뼈대를 지닙니다." },
+  { id: "cd-m10", chapterId: "central-dogma", type: "multiple", question: "리보솜 안에서 두개의 아미노산이 tRNA에 의해 근접하게 배열되었을 때, 이 둘 사이를 엮어주는 화학 결합 명칭은?", options: ["에스테르 결합", "글리코시드 결합", "펩타이드 결합", "인산 다이에스터 결합"], answer: "펩타이드 결합", explanation: "단백질의 기본 결합인 펩타이드결합이 리보솜 거푸집 내에서 일어납니다." }
+];
+
+export const questions = [...questionsPart1, ...questionsPart2];
